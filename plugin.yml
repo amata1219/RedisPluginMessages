@@ -1,0 +1,5 @@
+name: RedisPluginMessages
+main: amata1219.redis.plugin.messages.spigot.RedisPluginMessages
+version: 1.0.0
+api-version: 1.16
+author: '@amata1219'

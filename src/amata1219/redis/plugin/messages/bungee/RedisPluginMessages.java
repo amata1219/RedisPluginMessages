@@ -3,6 +3,7 @@ package amata1219.redis.plugin.messages.bungee;
 import amata1219.redis.plugin.messages.common.RedisMessageForwarder;
 import amata1219.redis.plugin.messages.common.RedisPluginMessagesAPI;
 import amata1219.redis.plugin.messages.common.RedisPublisher;
+import amata1219.redis.plugin.messages.common.io.ByteIOStreams;
 import amata1219.redis.plugin.messages.common.registry.ChannelRegistry;
 import amata1219.redis.plugin.messages.common.registry.SubscriberRegistry;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -21,25 +22,28 @@ public class RedisPluginMessages extends Plugin implements RedisPluginMessagesAP
     private final SubscriberRegistry subscriberRegistry = new SubscriberRegistry();
     private ChannelRegistry channelRegistry;
     private RedisPublisher publisher;
-    private ArrayList<Jedis> lentJedises;
+    private final ArrayList<Jedis> lentJedisList = new ArrayList<>();
 
     @Override
     public void onEnable() {
         instance = this;
 
         FileConfiguration fileConfiguration = new FileConfiguration("config.yml");
-        fileConfiguration.createFileInDirectory();
+        fileConfiguration.createFileIntoDirectory();
+
         Configuration config = fileConfiguration.config();
 
-        String uniqueServerName = config.getString("unique-server-name");
+        String uniqueInstanceName = config.getString("unique-name-of-instance");
+
+        ByteIOStreams.initialize(uniqueInstanceName);
 
         Configuration section = config.getSection("redis-server");
         String password = section.getString("password");
         pool = createJedisPool(section.getString("host"), section.getInt("port"), password.isEmpty() ? null : password);
 
-        RedisMessageForwarder forwarder = new RedisMessageForwarder(subscriberRegistry, uniqueServerName);
+        RedisMessageForwarder forwarder = new RedisMessageForwarder(subscriberRegistry, uniqueInstanceName);
         channelRegistry = new ChannelRegistry(borrowJedis(), forwarder);
-        publisher = new RedisPublisher(borrowJedis(), channelRegistry, uniqueServerName);
+        publisher = new RedisPublisher(borrowJedis(), channelRegistry, uniqueInstanceName);
     }
 
     private JedisPool createJedisPool(String host, int port, String password) {
@@ -48,13 +52,13 @@ public class RedisPluginMessages extends Plugin implements RedisPluginMessagesAP
 
     private Jedis borrowJedis() {
         Jedis jedis = pool.getResource();
-        lentJedises.add(jedis);
+        lentJedisList.add(jedis);
         return jedis;
     }
 
     @Override
     public void onDisable() {
-        for (Jedis jedis : lentJedises) jedis.close();
+        for (Jedis jedis : lentJedisList) jedis.close();
     }
 
     public static RedisPluginMessages instance() {

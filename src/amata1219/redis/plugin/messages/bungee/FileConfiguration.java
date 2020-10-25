@@ -21,17 +21,13 @@ public class FileConfiguration {
         this.file = new File(plugin.getDataFolder(), fileName);
     }
 
-    public void createFileInDirectory() {
+    public void createFileIntoDirectory() {
         if (file.exists()) return;
 
         File directory = plugin.getDataFolder();
         if (!directory.exists()) directory.mkdir();
 
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("creating...");
 
         try (InputStream in = plugin.getResourceAsStream(fileName)) {
             Files.copy(in, file.toPath());

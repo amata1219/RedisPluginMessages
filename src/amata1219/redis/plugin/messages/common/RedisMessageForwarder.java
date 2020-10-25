@@ -11,18 +11,18 @@ import java.util.ArrayList;
 public class RedisMessageForwarder extends BinaryJedisPubSub {
 
     private final SubscriberRegistry registry;
-    private final String hostServerName;
+    private final String hostInstanceName;
 
-    public RedisMessageForwarder(SubscriberRegistry registry, String hostServerName) {
+    public RedisMessageForwarder(SubscriberRegistry registry, String hostInstanceName) {
         this.registry = registry;
-        this.hostServerName = hostServerName;
+        this.hostInstanceName = hostInstanceName;
     }
 
     @Override
     public void onMessage(byte[] channel, byte[] message) {
         ByteArrayDataInput in = ByteIOStreams.newDataInput(message);
         String sourceServerName = in.readUTF();
-        if (sourceServerName.equals(hostServerName)) return;
+        if (sourceServerName.equals(hostInstanceName)) return;
         ArrayList<RedisSubscriber> subscribers = registry.getSubscribers(ChannelHashing.hash(channel));
         for (RedisSubscriber subscriber : subscribers) subscriber.onRedisMessageReceived(sourceServerName, in);
     }

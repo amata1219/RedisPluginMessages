@@ -4,6 +4,6 @@ import com.google.common.io.ByteArrayDataInput;
 
 public interface RedisSubscriber {
 
-    void onRedisMessageReceived(String sourceServerName, ByteArrayDataInput message);
+    void onRedisMessageReceived(String sourceServerName, ByteArrayDataInput messages);
 
 }

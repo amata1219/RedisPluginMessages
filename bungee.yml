@@ -1,0 +1,4 @@
+name: RedisPluginMessages
+main: amata1219.redis.plugin.messages.bungee.RedisPluginMessages
+version: 1.0.0
+author: '@amata1219'
