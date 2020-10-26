@@ -5,6 +5,8 @@ import amata1219.redis.plugin.messages.common.registry.SubscriberRegistry;
 
 public interface RedisPluginMessagesAPI {
 
+    String uniqueInstanceName();
+
     ChannelRegistry channelRegistry();
 
     SubscriberRegistry subscriberRegistry();
