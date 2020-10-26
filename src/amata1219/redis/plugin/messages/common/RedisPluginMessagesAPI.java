@@ -8,16 +8,16 @@ public interface RedisPluginMessagesAPI {
 
     ChannelRegistry channelRegistry();
 
-    default void registerIncomingChannel(String channel) {
-        channelRegistry().registerIncomingChannel(channel);
+    default void registerIncomingChannel(String... channels) {
+        for (String channel : channels) channelRegistry().registerIncomingChannel(channel);
     }
 
     default boolean isIncomingChannel(String channel) {
         return channelRegistry().isIncomingChannel(channel);
     }
 
-    default void registerOutgoingChannel(String channel) {
-        channelRegistry().registerOutgoingChannel(channel);
+    default void registerOutgoingChannel(String... channels) {
+        for (String channel : channels) channelRegistry().registerOutgoingChannel(channel);
     }
 
     default boolean isOutgoingChannel(String channel) {
