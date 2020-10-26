@@ -19,7 +19,6 @@ public class RedisPluginMessages extends JavaPlugin implements RedisPluginMessag
     private static RedisPluginMessages instance;
 
     private JedisPool pool;
-    private String uniqueInstanceName;
     private final SubscriberRegistry subscriberRegistry = new SubscriberRegistry();
     private ChannelRegistry channelRegistry;
     private RedisPublisher publisher;
@@ -31,7 +30,7 @@ public class RedisPluginMessages extends JavaPlugin implements RedisPluginMessag
 
         saveDefaultConfig();
 
-        uniqueInstanceName = getConfig().getString("unique-name-of-instance");
+        String uniqueInstanceName = getConfig().getString("unique-name-of-instance");
 
         ByteIOStreams.initialize(uniqueInstanceName);
 
@@ -61,11 +60,6 @@ public class RedisPluginMessages extends JavaPlugin implements RedisPluginMessag
 
     public static RedisPluginMessages instance() {
         return instance;
-    }
-
-    @Override
-    public String uniqueInstanceName() {
-        return uniqueInstanceName;
     }
 
     @Override

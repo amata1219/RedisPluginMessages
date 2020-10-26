@@ -16,7 +16,7 @@ public class SubscriberRegistry {
         list.add(subscriber);
     }
 
-    public ArrayList<RedisSubscriber> getSubscribers(Integer channelHashcode) {
+    public ArrayList<RedisSubscriber> subscribers(Integer channelHashcode) {
         return SUBSCRIBERS.get(channelHashcode);
     }
 

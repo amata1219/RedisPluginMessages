@@ -23,7 +23,7 @@ public class RedisMessageForwarder extends BinaryJedisPubSub {
         ByteArrayDataInput in = ByteIOStreams.newDataInput(message);
         String sourceServerName = in.readUTF();
         if (sourceServerName.equals(hostInstanceName)) return;
-        ArrayList<RedisSubscriber> subscribers = registry.getSubscribers(ChannelHashing.hash(channel));
+        ArrayList<RedisSubscriber> subscribers = registry.subscribers(ChannelHashing.hash(channel));
         for (RedisSubscriber subscriber : subscribers) subscriber.onRedisMessageReceived(sourceServerName, in);
     }
 
