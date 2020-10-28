@@ -4,7 +4,7 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-public class ByteIOStreams {
+public class ByteIO {
 
     private static String HOST_INSTANCE_NAME;
 

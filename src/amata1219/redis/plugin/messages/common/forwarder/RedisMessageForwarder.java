@@ -1,7 +1,8 @@
-package amata1219.redis.plugin.messages.common;
+package amata1219.redis.plugin.messages.common.forwarder;
 
+import amata1219.redis.plugin.messages.common.RedisSubscriber;
 import amata1219.redis.plugin.messages.common.channel.ChannelHashing;
-import amata1219.redis.plugin.messages.common.io.ByteIOStreams;
+import amata1219.redis.plugin.messages.common.io.ByteIO;
 import amata1219.redis.plugin.messages.common.registry.SubscriberRegistry;
 import com.google.common.io.ByteArrayDataInput;
 import redis.clients.jedis.BinaryJedisPubSub;
@@ -20,7 +21,7 @@ public class RedisMessageForwarder extends BinaryJedisPubSub {
 
     @Override
     public void onMessage(byte[] channel, byte[] message) {
-        ByteArrayDataInput in = ByteIOStreams.newDataInput(message);
+        ByteArrayDataInput in = ByteIO.newDataInput(message);
         String sourceServerName = in.readUTF();
         if (sourceServerName.equals(hostInstanceName)) return;
         ArrayList<RedisSubscriber> subscribers = registry.subscribers(ChannelHashing.hash(channel));

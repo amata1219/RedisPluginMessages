@@ -1,7 +1,8 @@
 package amata1219.redis.plugin.messages.common.registry;
 
-import amata1219.redis.plugin.messages.common.RedisMessageForwarder;
+import amata1219.redis.plugin.messages.common.forwarder.RedisMessageForwarder;
 import amata1219.redis.plugin.messages.common.channel.ChannelCodec;
+import amata1219.redis.plugin.messages.common.connection.JedisConnection;
 import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class ChannelRegistry {
         registerChannel(channel);
         INCOMING_CHANNELS.add(channel);
         new Thread(() -> jedis.subscribe(forwarder, toBytes(channel))).start();
+        System.out.println("registered " + channel);
     }
 
     public void registerOutgoingChannel(String channel) {
