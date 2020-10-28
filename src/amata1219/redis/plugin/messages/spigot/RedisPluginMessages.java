@@ -56,6 +56,7 @@ public class RedisPluginMessages extends JavaPlugin implements RedisPluginMessag
     @Override
     public void onDisable() {
         for (Jedis jedis : lentJedisList) jedis.close();
+        new Thread(pool::close).start();
     }
 
     public static RedisPluginMessages instance() {
