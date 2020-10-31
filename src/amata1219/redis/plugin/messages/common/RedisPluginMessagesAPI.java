@@ -12,12 +12,20 @@ public interface RedisPluginMessagesAPI {
         for (String channel : channels) channelRegistry().registerIncomingChannel(channel);
     }
 
+    default void unregisterIncomingChannels(String... channels) {
+        for (String channel : channels) channelRegistry().unregisterIncomingChannel(channel);
+    }
+
     default boolean isIncomingChannel(String channel) {
         return channelRegistry().isIncomingChannel(channel);
     }
 
     default void registerOutgoingChannels(String... channels) {
         for (String channel : channels) channelRegistry().registerOutgoingChannel(channel);
+    }
+
+    default void unregisterOutgoingChannels(String... channels) {
+        for (String channel : channels) channelRegistry().unregisterOutgoingChannel(channel);
     }
 
     default boolean isOutgoingChannel(String channel) {

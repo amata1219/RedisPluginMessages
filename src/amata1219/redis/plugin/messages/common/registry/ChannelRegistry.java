@@ -2,9 +2,9 @@ package amata1219.redis.plugin.messages.common.registry;
 
 import amata1219.redis.plugin.messages.common.forwarder.RedisMessageForwarder;
 import amata1219.redis.plugin.messages.common.channel.ChannelCodec;
-import amata1219.redis.plugin.messages.common.connection.JedisConnection;
 import redis.clients.jedis.Jedis;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -29,12 +29,33 @@ public class ChannelRegistry {
         registerChannel(channel);
         INCOMING_CHANNELS.add(channel);
         new Thread(() -> jedis.subscribe(forwarder, toBytes(channel))).start();
-        System.out.println("registered " + channel);
     }
 
     public void registerOutgoingChannel(String channel) {
         registerChannel(channel);
         OUTGOING_CHANNELS.add(channel);
+    }
+
+    private void unregisterChannel(String channel) {
+        if (!(isIncomingChannel(channel) || isOutgoingChannel(channel))) CHANNELS.remove(channel);
+    }
+
+    public void unregisterIncomingChannel(String channel) {
+        forwarder.unsubscribe(toBytes(channel));
+        INCOMING_CHANNELS.remove(channel);
+        unregisterChannel(channel);
+    }
+
+    public void unregisterOutgoingChannel(String channel) {
+        OUTGOING_CHANNELS.remove(channel);
+        unregisterChannel(channel);
+    }
+
+    public void unregisterAllChannels() {
+        for (String channel : CHANNELS.keySet()) {
+            unregisterIncomingChannel(channel);
+            unregisterOutgoingChannel(channel);
+        }
     }
 
     private boolean isRegistered(String channel) {

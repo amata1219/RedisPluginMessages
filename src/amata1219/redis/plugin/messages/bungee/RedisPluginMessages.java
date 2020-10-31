@@ -43,6 +43,7 @@ public class RedisPluginMessages extends Plugin implements RedisPluginMessagesAP
 
     @Override
     public void onDisable() {
+        channelRegistry.unregisterAllChannels();
         redis.closeAllInstances();
     }
 

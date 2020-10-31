@@ -9,8 +9,6 @@ import amata1219.redis.plugin.messages.common.registry.ChannelRegistry;
 import amata1219.redis.plugin.messages.common.registry.SubscriberRegistry;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisPluginMessages extends JavaPlugin implements RedisPluginMessagesAPI {
 
@@ -40,12 +38,9 @@ public class RedisPluginMessages extends JavaPlugin implements RedisPluginMessag
         publisher = new RedisPublisher(redis.createInstance(), channelRegistry, uniqueInstanceName);
     }
 
-    private JedisPool createJedisPool(String host, int port, String password) {
-        return new JedisPool(new JedisPoolConfig(), host, port, 60000, password);
-    }
-
     @Override
     public void onDisable() {
+        channelRegistry.unregisterAllChannels();
         redis.closeAllInstances();
     }
 
