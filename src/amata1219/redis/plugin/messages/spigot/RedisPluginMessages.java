@@ -1,6 +1,6 @@
 package amata1219.redis.plugin.messages.spigot;
 
-import amata1219.redis.plugin.messages.common.forwarder.RedisMessageForwarder;
+import amata1219.redis.plugin.messages.common.RedisMessageForwarder;
 import amata1219.redis.plugin.messages.common.RedisPluginMessagesAPI;
 import amata1219.redis.plugin.messages.common.RedisPublisher;
 import amata1219.redis.plugin.messages.common.io.ByteIO;
@@ -34,7 +34,7 @@ public class RedisPluginMessages extends JavaPlugin implements RedisPluginMessag
         redis = new Redis(section.getString("host"), section.getInt("port"), password.isEmpty() ? null : password);
 
         RedisMessageForwarder forwarder = new RedisMessageForwarder(subscriberRegistry, uniqueInstanceName);
-        channelRegistry = new ChannelRegistry(redis.createInstance(), forwarder);
+        channelRegistry = new ChannelRegistry(redis, forwarder);
         publisher = new RedisPublisher(redis.createInstance(), channelRegistry, uniqueInstanceName);
     }
 

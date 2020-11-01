@@ -9,11 +9,11 @@ public interface RedisPluginMessagesAPI {
     ChannelRegistry channelRegistry();
 
     default void registerIncomingChannels(String... channels) {
-        for (String channel : channels) channelRegistry().registerIncomingChannel(channel);
+        channelRegistry().registerIncomingChannels(channels);
     }
 
     default void unregisterIncomingChannels(String... channels) {
-        for (String channel : channels) channelRegistry().unregisterIncomingChannel(channel);
+        channelRegistry().unregisterIncomingChannels(channels);
     }
 
     default boolean isIncomingChannel(String channel) {
@@ -21,11 +21,11 @@ public interface RedisPluginMessagesAPI {
     }
 
     default void registerOutgoingChannels(String... channels) {
-        for (String channel : channels) channelRegistry().registerOutgoingChannel(channel);
+        channelRegistry().registerOutgoingChannels(channels);
     }
 
     default void unregisterOutgoingChannels(String... channels) {
-        for (String channel : channels) channelRegistry().unregisterOutgoingChannel(channel);
+        channelRegistry().unregisterOutgoingChannels(channels);
     }
 
     default boolean isOutgoingChannel(String channel) {

@@ -27,8 +27,6 @@ public class FileConfiguration {
         File directory = plugin.getDataFolder();
         if (!directory.exists()) directory.mkdir();
 
-        System.out.println("creating...");
-
         try (InputStream in = plugin.getResourceAsStream(fileName)) {
             Files.copy(in, file.toPath());
         } catch (IOException e) {
