@@ -2,7 +2,7 @@
 # RedisPluginMessages
 　インメモリデータベースのRedisを利用してプレイヤーを介さずにPluginMessagingを行うSpigot/BungeeCordプラグイン。  
 　従来のPluginMessagesとほぼ変わらない感覚でメッセージの送受信が出来ます。  
-  SpigotとBungeeCord間のメッセージングに加え、Spigot同士のメッセージングも出来ます。
+　SpigotとBungeeCord間のメッセージングに加え、Spigot同士のメッセージングも出来ます。
 
 ## 使用方法
 1. Redisを導入し利用可能な状態にします。  
