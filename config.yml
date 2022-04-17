@@ -1,10 +1,11 @@
 unique-name-of-instance: ''
-#このプラグインを読み込むインスタンスに、コンピュータ上で一意な名前を設定します。
-#インスタンスがプロキシサーバー(BungeeCord、Waterfall等)の場合は自由に名前を設定出来ます。
-#インスタンスがサーバーMOD(Spigot、Paper等)の場合は、プロキシサーバーの config.yml に記述されているサーバー名を指定して下さい。
-#プロキシサーバーを利用していない場合は自由に名前を設定出来ます。
+#Set a unique name on your computer for the instance that will load this plugin.
+#If the instance is a proxy server (BungeeCord, Waterfall, etc.), you can set the name freely.
+#If the instance is a server mod (Spigot, Paper, etc.), specify the server name described in the config.yml of the proxy server.
+#If you are not using a proxy server, you can set the name freely.
 
 redis-server:
   host: 'localhost'
   port: 6379
   password: ''
+  # #If there is no password, please write ''(two single quotation marks).
