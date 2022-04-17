@@ -1,3 +1,4 @@
+[日本語のREADMEはこちらになります。](https://github.com/amata1219/RedisPluginMessages/blob/master/README-ja.md)
 # RedisPluginMessages  
 Spigot/BungeeCord plugin for PluginMessaging without a player using Redis, an in-memory database.  
 Messages can be sent and received in much the same way as with conventional PluginMessages.
@@ -17,7 +18,7 @@ redis-server:
   host: 'localhost'
   port: 6379
   password: ''
-  # #If there is no password, please write ''(two single quotation marks).
+  #If there is no password, please write ''(two single quotation marks).
 ```
 4. Put RedisPluginMessages.jar in the plugins' folder of each BungeeCord/Spigot.
 5. Start the Redis server.
@@ -75,11 +76,11 @@ public class SpigotSideSample implements RedisSubscriber {
     @Override
     public void onRedisMessageReceived(String sourceServerName, ByteArrayDataInput messages) {
         Bukkit.broadcastMessage("Message received from %s!".formatted(sourceServerName));
-        //The sourceServerName is 'unique-name-of-instance' in the config.yml of RedisPluginMessages for that server.
+        //The sourceServerName is the value of 'unique-name-of-instance' in the config.yml of RedisPluginMessages for that server.
 
         String message = messages.readUTF();
         Bukkit.broadcastMessage(message);
-        //Reads and outputs sent messages.
+        //Reads and outputs received messages.
 
         ByteArrayDataOutput out = ByteIO.newDataOutput();
         //Create an empty ByteArrayDataOutput for writing data.
@@ -87,10 +88,10 @@ public class SpigotSideSample implements RedisSubscriber {
         World world = Bukkit.getWorld("world");
         out.writeLong(world.getTime());
         out.writeBoolean(world.isClearWeather());
-        //Write world state to ByteArrayDataOutput.
+        //Write state of main world to ByteArrayDataOutput.
 
         api.sendRedisMessage("res:main-world-state", out);
-        //Send a message to the main-world-state channel
+        //Send a message to the res:main-world-state channel
     }
     
 }
@@ -146,7 +147,7 @@ public class BungeeSideSubscriberSample implements RedisSubscriber {
                     Time: %d
                     Weather: %s
                 """, sourceServerName, time, weather);
-        //Reads and outputs sent messages.
+        //Reads and outputs received messages.
     }
 
 }
