@@ -1,8 +1,8 @@
-#RedisPluginMessages  
+# RedisPluginMessages  
 Spigot/BungeeCord plugin for PluginMessaging without a player using Redis, an in-memory database.  
 Messages can be sent and received in much the same way as with conventional PluginMessages.
 
-##Usage  
+## Usage  
 1. Install Redis and make it available.
 2. Create a RedisPluginMessages folder in the plugins' folder of the target BungeeCord/Spigot.
 3. Create a config.yml file with the following contents in the created RedisPluginMessages folder.
@@ -23,7 +23,7 @@ redis-server:
 5. Start the Redis server.
 6. Launch BungeeCord/Spigot and PluginMessaging will be available.
 
-##SampleCode  
+## SampleCode  
 plugin.yml
 ```yaml
 depend: [RedisPluginMessages]
