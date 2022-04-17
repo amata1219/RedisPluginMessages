@@ -29,7 +29,7 @@ plugin.yml
 ```yaml
 depend: [RedisPluginMessages]
 ```
-Spigot side
+Spigot側
 ```java
 import amata1219.redis.plugin.messages.common.RedisPluginMessagesAPI;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -100,7 +100,7 @@ bungee.yml
 ```yaml
 depends: [RedisPluginMessages]
 ```
-Bungee side
+Bungee側
 ```java
 import amata1219.redis.plugin.messages.common.RedisPluginMessagesAPI;
 import net.md_5.bungee.api.plugin.Plugin;
