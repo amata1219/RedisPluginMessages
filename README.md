@@ -1,7 +1,8 @@
 [日本語のREADMEはこちらになります。](https://github.com/amata1219/RedisPluginMessages/blob/master/README-ja.md)
 # RedisPluginMessages  
 Spigot/BungeeCord plugin for PluginMessaging without a player using Redis, an in-memory database.  
-Messages can be sent and received in much the same way as with conventional PluginMessages.
+Messages can be sent and received in much the same way as with conventional PluginMessages.  
+In addition to messaging between Spigot and BungeeCord, Spigot-to-Spigot messaging is also possible.  
 
 ## Usage  
 1. Install Redis and make it available.
